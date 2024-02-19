@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="vbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" style="-fx-background-color: light-blue;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PrimaryController">
+   <children>
+      <HBox fx:id="hbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="btn_terror" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="400.0" prefWidth="200.0" text="TERROR" textAlignment="CENTER" textFill="#7bc36e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="btn_romantica" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="400.0" prefWidth="200.0" text="ROMANTICA" textAlignment="CENTER" textFill="#7bc36e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="btn_infantil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="400.0" prefWidth="200.0" text="INFANTIL" textAlignment="CENTER" textFill="#7bc36e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+         </children>
+      </HBox>
+      <Label text="Descripcion" />
+      <Button fx:id="primaryButton" defaultButton="true" onAction="#switchToSecondary" prefHeight="25.0" prefWidth="594.0" text="START" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
