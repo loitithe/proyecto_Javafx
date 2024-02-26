@@ -23,8 +23,8 @@
       <Separator prefWidth="200.0" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
          <children>
-              <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="BACK" />
-            <Button fx:id="btn_reset" mnemonicParsing="false" text="RESET" />
+              <Button fx:id="btn_back" onAction="#switchToPrimary" text="BACK" />
+            <Button fx:id="btn_reset" mnemonicParsing="false" onAction="#btn_Reset" text="RESET" />
          </children>
       </HBox>
     </children>

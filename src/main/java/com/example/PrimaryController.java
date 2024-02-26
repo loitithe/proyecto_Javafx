@@ -1,18 +1,33 @@
 package com.example;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class PrimaryController implements Initializable {
+
+    @FXML
+    private VBox vbox;
+
+    @FXML
+    private HBox hbox;
     @FXML
     private Button btn_terror;
 
@@ -26,12 +41,35 @@ public class PrimaryController implements Initializable {
     private Button btn_infantil;
 
     @FXML
+    private Label lbl_descripcion;
+
+    private Cuento cuento;
+
+    @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+        initCuento();
+       // App.setRoot("secondary");
+
     }
 
     @FXML
     private void button_infantil(ActionEvent event) {
+        cuento.setTipo(Cuento.Tipo.INFANTIL);
+        System.out.println("Infantil");
+
+    }
+
+    @FXML
+    private void button_romantica(ActionEvent event) {
+        cuento.setTipo(Cuento.Tipo.ROMANTICA);
+        System.out.println("Romantica");
+
+    }
+
+    @FXML
+    private void button_terror(ActionEvent event) {
+        cuento.setTipo(Cuento.Tipo.TERROR);
+        System.out.println("Terror");
 
     }
 
@@ -39,10 +77,10 @@ public class PrimaryController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         initComponents();
         initImages();
-
     }
 
     private void initComponents() {
+        cuento = new Cuento("");
 
     }
 
@@ -56,8 +94,6 @@ public class PrimaryController implements Initializable {
         ImageView view = new ImageView();
         view.setImage(img_infantil_portada);
 
-        // view.setFitHeight(btn_infantil.getHeight());
-        // view.setFitWidth(btn_infantil.getWidth());
         view.setPreserveRatio(true);
 
         btn_infantil.setGraphic(view);
@@ -81,5 +117,42 @@ public class PrimaryController implements Initializable {
         btn_terror.setGraphic(view);
         btn_terror.setContentDisplay(ContentDisplay.BOTTOM);
 
+    }
+
+    private void initCuento() {
+        if (cuento.getTipo().equals(Cuento.Tipo.ROMANTICA)) {
+            cuento.setDescripcion("romantica");
+        }
+        if (cuento.getTipo().equals(Cuento.Tipo.TERROR)) {
+            cuento.setDescripcion("terror");
+        }
+        if (cuento.getTipo().equals(Cuento.Tipo.INFANTIL)) {
+            cuento.setDescripcion("infantil");
+        }
+        lbl_descripcion.setText(cuento.getDescripcion());
+        try {
+            // Cargo la vista
+            FXMLLoader loader = new FXMLLoader(PrimaryController.class.getResource("a.fxml"));
+
+            // Cargo la ventana
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            // Estamos pasando el cuento a la instancia del stage
+            stage.setUserData(cuento);
+            // Creo el Scene
+            Scene scene = new Scene(root);
+            System.out.println("La nueva escena" + scene.toString());
+            stage.setTitle("Datos cuento");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            System.out.println(e.getMessage().toString());
+            alert.showAndWait();
+        }
     }
 }
